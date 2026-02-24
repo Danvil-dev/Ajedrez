@@ -13,8 +13,24 @@ void elegirCasillaJugador(char tablero[x][y]) {
     } while (fila >= x || columna >= y || fila < 0 || columna < 0 || disponible(tablero, fila, columna) == false);
     tablero[fila][columna] = jX;
 }
-void elegirCasillaPC(char tablero[x][y]) {
+void elegirCasillaPC(char tablero[x][y], bool &primera) {
+
+    //UPDATES
     bool ganadora = false;
+    bool primero = false;
+    if (disponible(tablero,1,1) == true) {
+        tablero[1][1] = jY;
+        ganadora = true;
+    } else {
+        if (primera == false && ganadora == false && disponible(tablero,0,0)) {
+            tablero[0][0] = jY;
+            ganadora = true;
+            primera = true;
+        }
+
+    }
+    //FIN UPDATES
+if (ganadora == false) {
     for (int i=0; i<x; i++) {
         for (int j=0; j<y && ganadora==false; j++) {
             if (disponible(tablero, i, j)==true) {
@@ -27,6 +43,8 @@ void elegirCasillaPC(char tablero[x][y]) {
             }
         }
     }
+}
+
     char temp;
     if (ganadora == false) {
         for (int i=0; i<x && ganadora == false; i++) {
@@ -46,6 +64,7 @@ void elegirCasillaPC(char tablero[x][y]) {
             }
         }
     }
+
     if (ganadora == false) {
         bool puesto = false;
         //FIXME pregunar como funciona!!!

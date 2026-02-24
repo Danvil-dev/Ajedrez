@@ -5,6 +5,7 @@ using namespace std;
 #include "unJugador.h"
 #include <random>
 int main() {
+    bool primera = false;
     char tablero[x][y];
     int jugador = 1;
     int continuar = 0;
@@ -34,13 +35,14 @@ int main() {
                 break;
             case 2:
                 reseteo(tablero);
+                dibujarTablero(tablero);
                 while (true) {
                     elegirCasillaJugador(tablero);
                     dibujarTablero(tablero);
 
                     if (verificarVictoria(tablero)) {
                         cout << "Ganaste!!" << endl;
-                        break; // Rompe el bucle while y vuelve al menú
+                        break;
                     }
                     if (empate(tablero)) {
                         cout << "Empate!" << endl;
@@ -48,7 +50,7 @@ int main() {
                     }
 
                     cout << "Movimiento PC..." << endl;
-                    elegirCasillaPC(tablero);
+                    elegirCasillaPC(tablero, primera);
                     dibujarTablero(tablero);
 
                     if (verificarVictoria(tablero)) {
