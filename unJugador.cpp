@@ -14,22 +14,7 @@ void elegirCasillaJugador(char tablero[x][y]) {
     tablero[fila][columna] = jX;
 }
 void elegirCasillaPC(char tablero[x][y], bool &primera) {
-
-    //UPDATES
     bool ganadora = false;
-    bool primero = false;
-    if (disponible(tablero,1,1) == true) {
-        tablero[1][1] = jY;
-        ganadora = true;
-    } else {
-        if (primera == false && ganadora == false && disponible(tablero,0,0)) {
-            tablero[0][0] = jY;
-            ganadora = true;
-            primera = true;
-        }
-
-    }
-    //FIN UPDATES
 if (ganadora == false) {
     for (int i=0; i<x; i++) {
         for (int j=0; j<y && ganadora==false; j++) {
@@ -64,7 +49,42 @@ if (ganadora == false) {
             }
         }
     }
-
+    //UPDATES
+    if (disponible(tablero,0,0) == false && disponible(tablero,1,1) == false && disponible(tablero,2,2) == false && disponible(tablero,0,1) == true && ganadora == false) {
+        tablero[0][1] = jY;
+        ganadora = true;
+    }
+    if (disponible(tablero,0,2) == false && disponible(tablero,1,1) == false && disponible(tablero,2,0) == false && disponible(tablero, 2,1) == true && ganadora == false) {
+        tablero[2][1] = jY;
+        ganadora = true;
+    }
+    if (disponible(tablero,1,1) == true && ganadora == false) {
+        tablero[1][1] = jY;
+        ganadora = true;
+    } else {
+        if (primera == false && disponible(tablero,0,0) && ganadora == false) {
+            tablero[0][0] = jY;
+            ganadora = true;
+            primera = true;
+        }
+    if (disponible(tablero,1,1) == false && disponible(tablero,1,2) == false && disponible(tablero,2,1) == false && ganadora == false && disponible(tablero,2,2) == true) {
+        tablero[2][2] = jY;
+        ganadora =true;
+    }
+        if (disponible(tablero,1,1) == false && disponible(tablero,0,1) == false && disponible(tablero,1,0) == false && ganadora == false && disponible(tablero,0,0) == true) {
+            tablero[0][0] = jY;
+            ganadora =true;
+        }
+        if (disponible(tablero,1,1) == false && disponible(tablero,0,1) == false && disponible(tablero,1,2) == false && ganadora == false && disponible(tablero,0,2) == true) {
+            tablero[0][2] = jY;
+            ganadora =true;
+        }
+        if (disponible(tablero,1,1) == false && disponible(tablero,1,0) == false && disponible(tablero,2,1) == false && ganadora == false && disponible(tablero,2,0) == true) {
+            tablero[2][0] = jY;
+            ganadora =true;
+        }
+    }
+    //FIN UPDATES
     if (ganadora == false) {
         bool puesto = false;
         //FIXME pregunar como funciona!!!
@@ -81,4 +101,5 @@ if (ganadora == false) {
             }
         }
     }
+    if (primera == false) primera = true;
 }
