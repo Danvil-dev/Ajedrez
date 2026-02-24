@@ -1,3 +1,3 @@
 # Algoritmo que juega al 3 en raya
-## Puede estar sujeto a vulnerabilidades aun.
-### 25/02/2026
+## Descripción
+Algoritmo para jugar al 3 en raya, no aseguro la invencibilidad.
